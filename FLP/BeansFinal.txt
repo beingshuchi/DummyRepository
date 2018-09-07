@@ -1,0 +1,699 @@
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+
+@Entity
+@Table(name="Wishlist")
+public class WishlistBean {
+	
+	@Id
+	@Column(name="wishlist_id")
+	private String wishlistId;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(columnName="product_id")
+	private List<ProductBean> product;
+
+	public String getWishlistId() {
+		return wishlistId;
+	}
+
+	public void setWishlistId(String wishlistId) {
+		this.wishlistId = wishlistId;
+	}
+
+	public List<Product> getProductId() {
+		return productId;
+	}
+
+	public void setProductId(List<Product> productId) {
+		this.productId = productId;
+	}
+
+	public WishlistBean(String wishlistId, List<Product> productId) {
+		super();
+		this.wishlistId = wishlistId;
+		this.productId = productId;
+	}
+	public WishlistBean() {
+		
+	}
+	
+}
+
+
+package com.cg.capstore.bean;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name="merchant")
+public class MerchantBean {
+
+	@Id
+	@Column(name="merchant_id")
+	private String emailId;
+	@Column(name="merchant_name")
+	private String merchantName;
+	@Column(name="phone_no")
+	private String phoneNo;
+	@Column(name="type")
+	private String type;
+	@OneToMany
+	@Column(name="order_id")
+	private OrderBean order;
+	@Column(name="password")
+	private String password;
+	@OneToMany
+	@JoinColumn(ColumnName="coupon_id")
+	private List<CouponsBean> coupons;
+	
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public String getMerchantName() {
+		return merchantName;
+	}
+	public void setMerchantName(String merchantName) {
+		this.merchantName = merchantName;
+	}
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public List<Coupons> getCoupons() {
+		return coupons;
+	}
+	public void setCoupons(List<Coupons> coupons) {
+		this.coupons = coupons;
+	}
+	
+}
+
+package com.cg.capstore.bean;
+
+import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name="order")
+public class OrderBean {
+
+	@Id
+	@Column(name="order_id")
+	private String orderId;
+	@Column(name="order_status")
+	private String orderStatus;
+	@Column(name="quantity")
+	private int quantity;
+	@ManyToMany//(targetEntity=Product.class)
+	@JoinColumn(ColumnName="product_id")
+	private ProductBean product;
+	//private Customer customer;
+	@Column(name="payment_method")
+	private String paymentMethod;
+	@Column(name="date_of_delivery")
+	private Date dateOfOrder; //sql.date
+	@Column(name="delivery_date")
+	private Date deliveryDate;  //sql.date
+	@Column(name="min_billing_amount")
+	private Integer minBillingAmount;
+
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+	public Date getDateOfOrder() {
+		return dateOfOrder;
+	}
+	public void setDateOfOrder(Date dateOfOrder) {
+		this.dateOfOrder = dateOfOrder;
+	}
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+	public int getMinAmount() {
+		return minAmount;
+	}
+	public void setMinAmount(int minAmount) {
+		this.minAmount = minAmount;
+	}
+
+}
+
+package com.cg.capstore.bean;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name="product")
+public class ProductBean {
+
+	@Id
+	@Column(name="product_id")
+	private String productId;
+	@Column(name="product_name")
+	private String productName;
+	@Column(name="price")
+	private Double price;
+	@ManyToMany
+	@JoinColumn(ColumnName="merchant_id")
+	private MerchantBean merchant;
+	@Column(name="quantity")
+	private Double quantity;
+	@Column(name="category")
+	private String category;
+	@OneToOne
+	@JoinColumn(ColumnName="promo_code")
+	private PromosBean promoCode;
+	@OneToOne
+	@JoinColumn(ColumnName="discount_id")
+	private DiscountBean discount;
+	@OneToMany
+	@JoinColumn(ColumnName="image_id")
+	private List<ImageBean> imageId;
+	@OneToMany
+	@JoinColumn(ColumnName="feedback_id")
+	private FeedbackProductBean feedbackProduct;
+	
+	public String getProductId() {
+		return productId;
+	}
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	public Merchant getMerchant() {
+		return merchant;
+	}
+	public void setMerchant(Merchant merchant) {
+		this.merchant = merchant;
+	}
+	public Double getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public Promos getPromoCode() {
+		return promoCode;
+	}
+	public void setPromoCode(Promos promoCode) {
+		this.promoCode = promoCode;
+	}
+	public Discount getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
+	}
+	public String getImageId() {
+		return imageId;
+	}
+	public void setImageId(String imageId) {
+		this.imageId = imageId;
+	}
+	public FeedbackProduct getFeedbackProduct() {
+		return feedbackProduct;
+	}
+	public void setFeedbackProduct(FeedbackProduct feedbackProduct) {
+		this.feedbackProduct = feedbackProduct;
+	}
+	
+}
+
+package com.cg.capstore.bean;
+import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name="promos")
+public class PromosBean {
+
+	@Id
+	@Column(name="promo_code")
+	private String promoCode;
+	@Column(name="discount")
+	private Integer discount;
+	@Column(name="time_period")
+	private Date timePeriod;
+	
+	public String getPromoCode() {
+		return promoCode;
+	}
+	public void setPromoCode(String promoCode) {
+		this.promoCode = promoCode;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public LocalDateTime getTimePeriod() {
+		return timePeriod;
+	}
+	public void setTimePeriod(LocalDateTime timePeriod) {
+		this.timePeriod = timePeriod;
+	}
+
+}
+
+package com.cg.capstore.bean;
+
+import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name="discount")
+public class DiscountBean {
+
+	@Id
+	@Column(name="discount_id")
+	private String discountId;
+	@Column(name="discount_percent")
+	private Integer discountPercent;
+	@Column(name="time_period")
+	private Date timePeriod;
+	
+	public String getDiscountId() {
+		return discountId;
+	}
+	public void setDiscountId(String discountId) {
+		this.discountId = discountId;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public LocalDateTime getTimePeriod() {
+		return timePeriod;
+	}
+	public void setTimePeriod(LocalDateTime timePeriod) {
+		this.timePeriod = timePeriod;
+	}
+
+	
+}
+
+package com.cg.model;
+
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Transaction")
+public class PaymentDetailsBean {
+
+	@Id
+	@Column(name="transaction_id")
+	private String transactionId;
+	
+	@Column(name="transaction_date")
+	private Date transactionDate;
+	
+	@Column(name="payment_amount")
+	private Double paymentAmount;
+	
+	@Column(name="revenue")
+	private Double capStoreRevenueAmount;
+	
+	public String getTransactionId() {
+		return transactionId;
+	}
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+	
+	public Date getTransactionDate() {
+		return transactionDate;
+	}
+	public void setTransactionDate(Date transactionDate) {
+		this.transactionDate = transactionDate;
+	}
+	public Double getPaymentAmount() {
+		return paymentAmount;
+	}
+	public void setPaymentAmount(Double paymentAmount) {
+		this.paymentAmount = paymentAmount;
+	}
+	public Double getCapStoreRevenueAmount() {
+		return capStoreRevenueAmount;
+	}
+	public void setCapStoreRevenueAmount(Double capStoreRevenueAmount) {
+		this.capStoreRevenueAmount = capStoreRevenueAmount;
+	}
+	
+	public PaymentDetails(String transactionId, Date transactionDate, Double paymentAmount,
+			Double capStoreRevenueAmount) {
+		super();
+		this.transactionId = transactionId;
+		this.transactionDate = transactionDate;
+		this.paymentAmount = paymentAmount;
+		this.capStoreRevenueAmount = capStoreRevenueAmount;
+	}
+	
+	public PaymentDetails() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "PaymentDetails [transactionId=" + transactionId + ", transactionDate="
+				+ transactionDate + ", paymentAmount=" + paymentAmount + ", capStoreRevenueAmount=" + capStoreRevenueAmount
+				+ "]";
+	}
+	
+	
+
+}
+
+package com.cg.model;
+
+import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="FeedbackCommon")
+public class FeedbackCommonBean {
+	@Id
+	@Column(name="Feedback_common_id")
+	private String id;
+	
+	@ManyToOne
+	@JoinColumn(ColumnName="merchant_id")
+	private Merchant merchant;
+	
+	@ManyToOne
+	@JoinColumn(ColumnName="customer_id")
+	private Customer customer;
+	
+	@Column(name="comments")
+	private String comments;
+	
+	@Column(name="date")
+	private Date date;
+	
+	
+	public FeedbackCommon() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public FeedbackCommon(String id, Customer customer, String comments, Date date, Merchant merchant) {
+		super();
+		this.id = id;
+		this.customer = customer;
+		this.comments = comments;
+		this.date = date;
+		this.merchant = merchant;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public Merchant getMerchant() {
+		return merchant;
+	}
+	public void setMerchant(Merchant merchant) {
+		this.merchant = merchant;
+	}	
+	@Override
+	public String toString() {
+		return "FeedbackCommon [id=" + id + ", merchant=" + merchant + ", customer=" + customer+ ", comments="
+				+ comments + ", date=" + date + "]";
+	}	
+	
+
+}
+
+package com.cg.capstore.beans;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name="admin")
+public class AdminBean {
+	
+	@Id
+	@Column(name="admin_id")
+	private String emailId;
+	@Column(name="password")
+	private String Password;
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public String getPassword() {
+		return Password;
+	}
+	public void setPassword(String password) {
+		Password = password;
+	}
+	@Override
+	public String toString() {
+		return "Admin [emailId=" + emailId + ", Password=" + Password + "]";
+	}
+	
+	
+	
+}
+
+package com.cg.capstore.bean;
+
+@Entity
+@Table(name="customer")
+public class CustomerBean {
+
+	@Id
+	@Column(name="customer_id")
+	private String email;
+
+	@Column(name="password")
+	private String password;
+
+	@Column(name="customer_name")
+	private String customerName;
+
+	@Column(name="mobile_num")
+	private String mobileNo;
+
+	@Column(name="address")
+	private String address;
+	
+	@OneToOne
+	@Column(name="wishlist_id")
+	private WishlistBean wishlist;
+
+	@Column(name="cart")
+	private Map<String,Product> cart;
+
+	@OneToOne
+	@JoinColumn(ColumnName="order_id")
+	private OrderBean order;
+
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getMobileNo() {
+		return mobileNo;
+	}
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Wishlist getWishlist() {
+		return wishlist;
+	}
+	public void setWishlist(Wishlist wishlist) {
+		this.wishlist = wishlist;
+	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	public CustomerBean(String email, String password, String customerName, String mobileNo, String address,
+			Wishlist wishlist, Order order) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.customerName = customerName;
+		this.mobileNo = mobileNo;
+		this.address = address;
+		this.wishlist = wishlist;
+		this.order = order;
+	}
+	@Override
+	public String toString() {
+		return "CustomerBean [email=" + email + ", password=" + password + ", customerName=" + customerName
+				+ ", mobileNo=" + mobileNo + ", address=" + address + ", wishlist=" + wishlist + ", order="
+				+ order + "]";
+	}
+	public CustomerBean() {
+		super();
+		
+	}
+	
+	
+	
+}
+
+
