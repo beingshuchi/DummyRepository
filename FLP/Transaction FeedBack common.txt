@@ -1,0 +1,23 @@
+Transaction Bean:
+
+public class Transaction {
+	
+
+	private String transactionId;
+	private Cart paymentMethod;
+	private Date transDate;
+	private double/String capStoreRevenue;
+}
+==================================================
+FeedbackCommon bean:
+
+
+public class FeedbackCommon {
+	
+	private Customer customer;
+	private Product product;
+	private String comments;
+	private LocalDateTime time;
+	private Merchant merchant;
+
+}
