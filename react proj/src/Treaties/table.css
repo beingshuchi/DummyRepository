@@ -1,0 +1,52 @@
+.p-paginator .p-paginator-pages {
+    width: auto;
+    line-height: 1;
+    color:rgb(0, 166, 170);
+}
+.p-paginator-element{
+    border: 1px solid  rgb(144, 151, 151);
+    
+}
+.p-paginator-page.p-paginator-element.p-highlight{
+    border: 1px solid  rgb(0, 166, 170);
+    background:rgb(0, 166, 170);
+    color: white;
+}
+
+.p-column-title{
+    font-family: sans-serif !important;
+    color: rgb(22, 118, 142) !important;
+}
+.p-datatable-row{
+    font-family: sans-serif !important;
+    color: rgb(0, 166, 170) !important;
+}
+.p-datatable-row {
+    border: 0px;
+    border-bottom: 1px solid #ddd;
+}
+
+#menu{
+    font-family: sans-serif !important;
+    color: rgb(22, 118, 142) !important;
+    border: none;
+    background:white;
+    width: 120px;
+}
+
+.a1{
+    font-family: sans-serif !important;
+    color: rgb(0, 166, 170) !important;
+    border: 1px solid rgb(0, 166, 170);
+    background:white;
+    padding:none;
+}
+.p-overlaypanel-content{
+    font-family: sans-serif !important;
+    color: rgb(22, 118, 142) !important;
+    border: none;
+    background:white;
+}
+.p-button-text-icon-right .p-button-text {
+    padding: none !important;
+}

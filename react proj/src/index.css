@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  padding: 2em;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+/* You can add global styles to this file, and also import other style files */
+body .ui-dropdown
+{
+    border: none;
+    border-bottom: 1px solid rgb(0, 166, 170);
+    color: rgb(0, 166, 170);
+}
+.ui-table table{
+    border-collapse: collapse;
+}
+/* body .ui-table .ui-table-thead .ng-star-inserted{ */
+body .ui-table .ui-table-thead > tr > th{
+    border: 0px;
+    background:transparent;
+}
+body .ui-table .ui-table-tbody > tr > td {
+    border: 0px;
+    border-bottom: 1px solid #ddd;
+    color: rgb(68, 132, 154) 1px solid ;
+    /* color: hsl(130, 93, 104); */
+}
+body .ui-table .ui-table-tbody > tr:enabled:hover{
+    background: rgb(217,242,242);
+}
+body .ui-table .ui-table-tbody > tr:nth-child(even) {background-color:white;}
+.ui-table .ui-paginator-bottom{
+    border: none;
+    background: transparent;
+}
+body .ui-paginator .ui-dropdown{
+    float: left;
+    text-underline-position: below;
+    border-bottom: 1px solid rgb(0, 166, 170);
+    color: rgb(0, 166, 170);
+}
+body .ui-paginator .ui-paginator-first, body .ui-paginator .ui-paginator-prev, body .ui-paginator .ui-paginator-next, body .ui-paginator .ui-paginator-last{
+    border: 1px solid rgb(0, 166, 170);
+    color: rgb(0, 166, 170);
+}
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active{
+    background-color:rgb(217,242,242);
+    color: rgb(48,7,59) solid;
+    border: 1px solid rgb(48,7,59);
+}body .ui-paginator .ui-paginator-pages .ui-paginator-page{
+    background-color: transparent;
+    color: rgb(0, 166, 170);
+    border: 1px solid rgb(0, 166, 170);
+}
+/* body .ui-button.ui-button-icon-only .ui-button-text{
+    background: transparent;
+    color: rgb(0, 166, 170);
+    border: 1px solid rgb(0, 166, 170);
+} */
+body .ui-button.ui-button-icon-only{
+    background: transparent;
+    color: black;
+    border: rgb(0, 166, 170);
+
+} 
+body .ui-button{
+    background: transparent;
+    color: rgb(0, 166, 170);
+    border:1px solid rgb(0, 166, 170);
+}
+body .ui-button:enabled:hover{
+    background: transparent;
+    color: rgb(0, 166, 170);
+}
+body .ui-widget{
+    font-size: 13px;
+} 
+/* .a1{
+    border: rgb(0, 166, 170);
+} */

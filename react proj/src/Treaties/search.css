@@ -1,0 +1,111 @@
+.in
+{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid  rgb(0, 166, 170);
+    color:rgb(0, 166, 170);
+    width: 150px;
+}
+h1{
+    font-family: sans-serif !important;
+    color: rgb(22, 118, 142) !important;
+}
+
+h3{
+    font-family: sans-serif !important;
+    color: rgb(22, 118, 142) !important;
+}
+.label{
+    font-family: sans-serif;
+    color: rgb(22, 118, 142);
+}
+.b0
+{
+    padding-right: 0px;
+}
+.b1
+{
+    background: white;
+    color: rgb(0, 166, 170);
+    border-color: rgb(0, 166, 170);
+}
+.b2
+{
+    background: transparent;
+    color: rgb(0, 166, 170);
+    border:none;
+}
+.b3
+{
+    background: rgb(0, 166, 170);
+    color: white;
+    border: none;
+    height:230px; 
+    width:60px;
+}
+.b4
+{
+    border-bottom: 1px solid  rgb(0, 166, 170) !important;
+    padding: none;
+    color: rgb(0, 166, 170) !important;
+    width: 150px;
+}
+.Dropdown-control{
+font-family: sans-serif !important;
+overflow: hidden;
+background-color: white;
+border: none;
+border-radius: 2px;
+box-sizing: border-box;
+color: rgb(0, 166, 170) !important;
+cursor: default;
+outline: none;
+padding: none !important;
+transition: all 200ms ease;
+
+}
+.Dropdown-option {
+    box-sizing: border-box;
+    color:rgb(0, 166, 170) !important;
+    cursor: pointer;
+    display: block;
+    padding: none;
+}
+
+.Dropdown-arrow {
+    border-color: rgb(0, 166, 170) transparent transparent;
+    border-style: solid;
+    border-width: 5px 5px 0;
+    content: ' ';
+    display: block;
+    height: 0;
+    margin-top: -ceil(2.5);
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    width: 0;
+}
+
+
+.is-open .Dropdown-arrow {
+     border-color: transparent transparent  rgb(0, 166, 170); 
+     border-width: 0 5px 5px; 
+}
+.Dropdown-menu {
+    color: rgb(0, 166, 170) !important;
+    background-color: white;
+    border: none;
+    box-sizing: border-box;
+    margin-top: -1px;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1000;
+}
+
+::placeholder
+{
+    color:  rgb(0, 166, 170);
+}
